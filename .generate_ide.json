@@ -1,0 +1,16 @@
+{
+    "launchers": [
+        {
+            "name": "Run",
+            "args": [ "--asset-root", "content" ]
+        },
+        {
+            "name": "Run - no dynamic modules",
+            "args": [ "--asset-root", "content", "--load-dynamic", "0" ]
+        },
+        {
+            "name": "Run max 5 tick",
+            "args": [ "--max-kernel-tick", "5", "--asset-root", "content" ]
+        }
+    ]
+}
