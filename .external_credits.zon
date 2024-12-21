@@ -1,0 +1,5 @@
+.{
+    .externals = .{
+        .{ .name = "minimal", .license = "LICENSE" },
+    },
+}

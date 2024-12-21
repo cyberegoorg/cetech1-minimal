@@ -1,0 +1,46 @@
+# Build
+/build
+
+# ZIG
+*zig-cache
+*zig-out
+
+# VSCode
+
+# MacOS
+*.DS_Store
+.DS_Store
+*.dylib
+
+# Xcode
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+kcov-output/
+
+imgui.ini
+
+_static.zig
+
+# VSCode
+.vscode/launch.json
+.vscode/settings.json
+
+# Fleet
+.fleet/settings.json
+.fleet/run.json
+
+# Idea
+.idea/
+
+# temp folder for tests
+/fixtures/tmp
+
+# folder for generated tmp data, cache and debug purpose files
+.ct_temp
+
