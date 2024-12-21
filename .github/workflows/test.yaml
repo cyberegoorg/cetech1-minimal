@@ -1,0 +1,116 @@
+name: Test
+
+permissions:
+  checks: write
+
+on:
+  pull_request:
+  push:
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}-${{ github.actor }}
+  cancel-in-progress: true
+
+jobs:
+  validation:
+    name: Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read .zig-version
+        id: zigversion
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./.zigversion
+      - name: Install Zig
+        uses: mlugg/setup-zig@v1
+        with:
+          version: ${{ steps.zigversion.outputs.content }}
+      
+      - name: Lint
+        run: zig fmt --check . --exclude externals/
+  
+  # TODO: Fix me
+  x86-64-linux:
+    needs: ["validation"]
+    name: x86-64 Linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Prepare
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: libdbus-1-dev
+          version: 1.0
+
+      - name: Read .zig-version
+        id: zigversion
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./.zigversion
+      - name: Install Zig
+        uses: mlugg/setup-zig@v1
+        with:
+          version: ${{ steps.zigversion.outputs.content }}
+
+      - name: Build
+        run: .ci/build.sh
+  
+  # FIXME: this works on cetech1 CI but not in this repo.
+  # x86-64-macos:
+  #   needs: ["validation"]
+  #   name: x86-64 Macos
+  #   runs-on: macos-latest
+  #   timeout-minutes: 20
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+
+  #     - name: Read .zig-version
+  #       id: zigversion
+  #       uses: juliangruber/read-file-action@v1
+  #       with:
+  #         path: ./.zigversion
+  #     - name: Install Zig
+  #       uses: mlugg/setup-zig@v1
+  #       with:
+  #         version: ${{ steps.zigversion.outputs.content }}
+      
+  #     - name: Build
+  #       run: .ci/build.sh
+
+  # FIXME: this works on cetech1 CI but not in this repo.
+  # x86-64-windows:
+  #   needs: ["validation"]
+  #   name: x86-64 Windows
+  #   runs-on: windows-latest
+  #   timeout-minutes: 20
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+
+  #     - name: Read .zig-version
+  #       id: zigversion
+  #       uses: juliangruber/read-file-action@v1
+  #       with:
+  #         path: ./.zigversion
+  #     - name: Install Zig
+  #       uses: mlugg/setup-zig@v1
+  #       with:
+  #         version: ${{ steps.zigversion.outputs.content }}
+
+  #     - name: Build
+  #       shell: bash
+  #       run: .ci/build.sh
