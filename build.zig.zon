@@ -1,0 +1,27 @@
+.{
+    .name = .minimal,
+    .fingerprint = 0x4037f28a95f235a6, // FIXME: CHANGE THIS AFTER CLONE/TEMPLATE!!!
+    .version = "0.1.0",
+    .minimum_zig_version = "0.15.1",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "README.md",
+    },
+    .dependencies = .{
+        //
+        // CETech1
+        //
+        .cetech1 = .{ .path = "externals/cetech1" },
+
+        .system_sdk = .{
+            .url = "https://github.com/zig-gamedev/system_sdk/archive/c0dbf11cdc17da5904ea8a17eadc54dee26567ec.tar.gz",
+            .hash = "system_sdk-0.3.0-dev-alwUNnYaaAJAtIdE2fg4NQfDqEKs7QCXy_qYukAOBfmF",
+        },
+
+        //
+        // Modules
+        //
+        .minimal = .{ .path = "modules/minimal" },
+    },
+}

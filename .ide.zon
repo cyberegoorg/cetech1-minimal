@@ -1,0 +1,7 @@
+.{
+    .launchers = .{
+        .{ .name = "Run studio", .args = .{ "--asset-root", "content" } },
+        .{ .name = "Run runner", .program = .runner, .args = .{ "--asset-root", "content" } },
+        .{ .name = "Run max 5 tick", .args = .{ "--max-kernel-tick", "5", "--asset-root", "content" } },
+    },
+}
