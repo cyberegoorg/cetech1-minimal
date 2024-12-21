@@ -1,0 +1,12 @@
+.{
+    .name = .minimal,
+    .fingerprint = 0x4037f28af029e8b1,
+    .version = "0.1.0",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+    },
+    .dependencies = .{
+        .cetech1 = .{ .path = "../../externals/cetech1/public/" },
+    },
+}
