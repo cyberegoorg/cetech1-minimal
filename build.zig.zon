@@ -1,0 +1,12 @@
+.{
+    .name = "cetech1-minimal",
+    .version = "0.1.0",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "README.md",
+    },
+    .dependencies = .{
+        .cetech1 = .{ .path = "externals/cetech1" },
+    },
+}
